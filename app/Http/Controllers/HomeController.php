@@ -15,13 +15,10 @@ class HomeController extends Controller
         ]);
     }
 
-    public function listar($nombre) {
-        $ruta = Municipio::where('nombre', $nombre)->first();
-        $fecha = date('Y-m-d');
-        var_dump($fecha);
-        $lista = Registro::query("SELECT * FROM `registros` WHERE `created_at` LIKE '%2018-03-14%'");
-
-        dd($lista);
+    public function listar(Municipio $municipio) {
+        $lista = Registro::whereDate('created_at', '=', date('Y-m-d'))
+                ->where('municipio_id', $municipio->id)
+                ->get();
 
         return view('listar', [
             'lista' => $lista
