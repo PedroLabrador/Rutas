@@ -8,7 +8,6 @@
         <title>Rutas</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <style>
             .content {
@@ -18,7 +17,7 @@
             }
             .btn, .form-control {
                 margin: 1em 
-            }
+            }   
             .m-t-2 {
                 margin-top: 5%
             }
@@ -45,9 +44,30 @@
                     </div>
                 </div>
             @endif
-
-            <div class="content m-t-2">
-                Lista
+            <h2>Lista {{ Request::route()->municipio->nombre . " " . Request::route()->municipio->hora }}</h2>
+            
+            <div class="m-t-2">
+                <table class="table">
+                    <tr>
+                        <th>Cedula</th>
+                        <th>Nombre</th>
+                        <th></th>
+                    </tr>
+                    
+                    @forelse ($lista as $usuario)
+                    <tr>
+                        <td>
+                            {{ $usuario->cedula }}                       
+                        </td>
+                        <td>
+                            {{ $usuario->nombre }}
+                        </td>
+                        <td></td>
+                    </tr>
+                    @empty
+                        No hay usuarios anotados en la lista para hoy
+                    @endforelse
+                </table>
             </div>
         </div>
     </body>
