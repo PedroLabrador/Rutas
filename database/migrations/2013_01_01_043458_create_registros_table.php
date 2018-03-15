@@ -19,6 +19,8 @@ class CreateRegistrosTable extends Migration
             $table->integer('municipio_id')->unsigned();
             $table->string('cedula', 16);
             $table->string('nombre', 64);
+            $table->string('hora', 16);
+            $table->integer('intentos');
         });
     }
 
