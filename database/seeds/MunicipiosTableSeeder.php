@@ -12,10 +12,12 @@ class MunicipiosTableSeeder extends Seeder
     public function run()
     {
 //        $faker = Faker\Factory::create();
-
-        DB::table('municipios')->insert([ //,
-            'nombre' => 'Michelena',
-            'hora' => '07:10 PM'
-        ]);
+        $municipios = ['Michelena', 'Cordero'];
+        foreach ($municipios as $municipio) {
+            DB::table('municipios')->insert([ //,
+                'nombre' => $municipio,
+                'hora' => '07:10 PM'
+            ]);
+        }
     }
 }
