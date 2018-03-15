@@ -52,12 +52,12 @@
                         {{ csrf_field() }}
                         <select name="municipio_id" id="" class='form-control'>
                             @forelse ($municipios as $municipio)
-                                <option value="{{ $municipio->id }}">{{ $municipio->nombre }} Hora: {{ $municipio->hora }}</option>
+                                <option value="{{ $municipio->id }} {{ $municipio->hora }}">{{ $municipio->nombre }} Hora: {{ $municipio->hora }}</option>
                             @empty
                                 <option value="0" selected disabled>No hay rutas</option>                       
                             @endforelse
                         </select>
-                        <label for="cedula">Cedulaa</label>
+                        <label for="cedula">Cedula</label>
                         <input class='form-control' type="text" name="cedula" id="cedula">
                         <label for="nombre">Nombre</label>
                         <input class='form-control' type="text" name="nombre" id="nombre">
