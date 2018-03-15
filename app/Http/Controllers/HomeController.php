@@ -15,13 +15,20 @@ class HomeController extends Controller
         ]);
     }
 
-    public function listar(Municipio $municipio) {
+    public function listar(Municipio $municipio, $hora) {
+        $ruta = Municipio::where('nombre', $municipio->nombre)
+                    ->where('hora', 'LIKE', "%$hora%")
+                    ->first();
+        if (!$ruta)
+            return abort(404);
+
         $lista = Registro::whereDate('created_at', '=', date('Y-m-d'))
-                ->where('municipio_id', $municipio->id)
+                ->where('municipio_id', $ruta->id)
                 ->get();
 
         return view('listar', [
-            'lista' => $lista
+            'lista' => $lista,
+            'ruta'  => $ruta
         ]);
     }
 
@@ -29,13 +36,31 @@ class HomeController extends Controller
         $this->validate($request, [
             'cedula' => 'required',
             'nombre' => 'required',
-            'municipio_id' => 'required'
+            'municipio_id' => 'required|min:10|max:10'
         ], [
             'cedula.required' => 'La cedula es obligatoria.',
             'nombre.required' => 'El nombre es obligatorio.',
-            'municipio_id.required'   => 'La ruta es obligatoria'
+            'municipio_id.required'   => 'La ruta es obligatoria',
+            'municipio_id.min' => 'No intentes joderme.. -.-',
+            'municipio_id.max' => 'Deja quieto -.-'
         ]);
+
+        $separar = explode(" ", $request->input('municipio_id'), 2);
         $requestData = $request->all();
+        $requestData['municipio_id'] = $separar[0];
+        $requestData['hora'] = $separar[1];
+        $requestData['intentos'] = 1;
+
+        $existe = Registro::where('cedula', $requestData['cedula'])
+                    ->whereDate('created_at', '=', date('Y-m-d'))
+                    ->where('municipio_id', $requestData['municipio_id'])
+                    ->first();
+
+        if ($existe) {
+            $existe->intentos++;
+            $existe->save();
+            return redirect('/')->with('flash_message', 'Anotado en la ruta!');    
+        }
 
         Registro::create($requestData);
 
