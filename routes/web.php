@@ -13,6 +13,6 @@
 
 Route::get('/', 'HomeController@home');
 
-Route::get('/lista/{municipio}', 'HomeController@listar');
+Route::get('/lista/{municipio}/{hora}', 'HomeController@listar');
 
 Route::post('/registrar', 'HomeController@registrar');
