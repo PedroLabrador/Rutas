@@ -44,11 +44,12 @@
                     </div>
                 </div>
             @endif
-            <h2>Lista {{ Request::route()->municipio->nombre . " " . Request::route()->municipio->hora }}</h2>
+            <h2>Lista {{ $ruta->nombre . " " . $ruta->hora }}</h2>
             
             <div class="m-t-2">
                 <table class="table">
                     <tr>
+                        <th>#</th>
                         <th>Cedula</th>
                         <th>Nombre</th>
                         <th></th>
@@ -56,13 +57,10 @@
                     
                     @forelse ($lista as $usuario)
                     <tr>
-                        <td>
-                            {{ $usuario->cedula }}                       
-                        </td>
-                        <td>
-                            {{ $usuario->nombre }}
-                        </td>
-                        <td></td>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $usuario->cedula }}</td>
+                        <td>{{ $usuario->nombre }}</td>
+                        <td>{{ $usuario->intentos }}</td>
                     </tr>
                     @empty
                         No hay usuarios anotados en la lista para hoy
