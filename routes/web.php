@@ -16,3 +16,6 @@ Route::get('/', 'HomeController@home');
 Route::get('/lista/{municipio}/{hora}', 'HomeController@listar');
 
 Route::post('/registrar', 'HomeController@registrar');
+Auth::routes();
+
+Route::get('/home', 'HomeController@home');
