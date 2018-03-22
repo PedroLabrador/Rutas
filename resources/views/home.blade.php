@@ -32,7 +32,7 @@
 						<div>
 							<form class='form' action="/registrar" method="post">
 								{{ csrf_field() }}
-								<select name="municipio_id" id="" class='form-control'>
+								<select name="municipio_id" id="" class='form-control space'>
 									@forelse ($municipios as $municipio)
 										<option value="{{ $municipio->id }} {{ $municipio->hora }}">{{ $municipio->nombre }} Hora: {{ $municipio->hora }}</option>
 									@empty
@@ -40,10 +40,10 @@
 									@endforelse
 								</select>
 								<label for="cedula">Cedula</label>
-								<input class='form-control' type="text" name="cedula" id="cedula">
+								<input class='form-control space' type="text" name="cedula" id="cedula">
 								<label for="nombre">Nombre</label>
-								<input class='form-control' type="text" name="nombre" id="nombre">
-								<button class='btn btn-default'>Anotarse</button>
+								<input class='form-control space' type="text" name="nombre" id="nombre">
+								<button class='btn btn-default space'>Anotarse</button>
 							</form>
 						</div>
 					</div>

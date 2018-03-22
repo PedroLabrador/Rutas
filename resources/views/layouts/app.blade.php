@@ -18,8 +18,8 @@
             margin: 0 auto;
             text-align: center
         }
-        .btn, .form-control {
-            margin: 1em 
+        .space {
+            margin: .5em 0
         }
         .m-t-2 {
             margin-top: 5%
