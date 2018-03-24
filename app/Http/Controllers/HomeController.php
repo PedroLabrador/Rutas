@@ -27,13 +27,13 @@ class HomeController extends Controller
     }
 
     public function listar(Municipio $municipio, $hora) {
-        $ruta = Municipio::where('nombre', $municipio->nombre)
+        $ruta = Horario::where('municipio_id', $municipio->id)
                     ->where('hora', 'LIKE', "%$hora%")
                     ->first();
         if (!$ruta)
             return abort(404);
         $lista = Registro::whereDate('created_at', '=', date('Y-m-d'))
-                ->where('municipio_id', $ruta->id)
+                ->where('horario_id', $ruta->id)
                 ->get();
         return view('listar', [
             'lista' => $lista,
