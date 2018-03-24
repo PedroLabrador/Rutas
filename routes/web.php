@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', 'HomeController@home');
-
-Route::get('/lista/{municipio}/{hora}', 'HomeController@listar');
-
-Route::post('/registrar', 'HomeController@registrar');
 Auth::routes();
 
+Route::get('/', 'HomeController@home');
+Route::get('/lista/{municipio}/{hora}', 'HomeController@listar');
+Route::post('/registrar', 'HomeController@registrar');
 Route::get('/home', 'HomeController@home');
+
+Route::get('/admin', 'AdminController@index')->middleware('auth');
