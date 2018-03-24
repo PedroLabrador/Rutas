@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Registro;
 use App\Municipio;
+use App\Horario;
 
 class HomeController extends Controller
 {
@@ -19,9 +20,9 @@ class HomeController extends Controller
     }
 
     public function home() {
-        $municipios = Municipio::all();
+        $horarios = Horario::all();
         return view('home', [
-            'municipios' => $municipios
+            'horarios' => $horarios
         ]);
     }
 
@@ -44,22 +45,22 @@ class HomeController extends Controller
         $this->validate($request, [
             'cedula' => 'required',
             'nombre' => 'required',
-            'municipio_id' => 'required|min:10|max:10'
+            'horario_id' => 'required|min:10|max:10'
         ], [
             'cedula.required' => 'La cedula es obligatoria.',
             'nombre.required' => 'El nombre es obligatorio.',
-            'municipio_id.required'   => 'La ruta es obligatoria',
-            'municipio_id.min' => 'No intentes joderme.. -.-',
-            'municipio_id.max' => 'Deja quieto -.-'
+            'horario_id.required'   => 'La ruta es obligatoria',
+            'horario_id.min' => 'No intentes joderme.. -.-',
+            'horario_id.max' => 'Deja quieto -.-'
         ]);
-        $separar = explode(" ", $request->input('municipio_id'), 2);
+        $separar = explode(" ", $request->input('horario_id'), 2);
         $requestData = $request->all();
-        $requestData['municipio_id'] = $separar[0];
+        $requestData['horario_id'] = $separar[0];
         $requestData['hora'] = $separar[1];
         $requestData['intentos'] = 1;
         $existe = Registro::where('cedula', $requestData['cedula'])
                     ->whereDate('created_at', '=', date('Y-m-d'))
-                    ->where('municipio_id', $requestData['municipio_id'])
+                    ->where('horario_id', $requestData['horario_id'])
                     ->first();
         if ($existe) {
             $existe->intentos++;

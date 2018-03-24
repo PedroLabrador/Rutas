@@ -32,9 +32,9 @@
 						<div>
 							<form class='form' action="/registrar" method="post">
 								{{ csrf_field() }}
-								<select name="municipio_id" id="" class='form-control space'>
-									@forelse ($municipios as $municipio)
-										<option value="{{ $municipio->id }} {{ $municipio->hora }}">{{ $municipio->nombre }} Hora: {{ $municipio->hora }}</option>
+								<select name="horario_id" id="" class='form-control space'>
+									@forelse ($horarios as $horario)
+										<option value="{{ $horario->id }} {{ $horario->hora }}">{{ $horario->municipio->nombre }} Hora: {{ $horario->hora }}</option>
 									@empty
 										<option value="0" selected disabled>No hay rutas</option>                       
 									@endforelse
