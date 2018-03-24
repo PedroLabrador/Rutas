@@ -24,6 +24,10 @@
         .m-t-2 {
             margin-top: 5%
         }
+        .float-right {
+            float: right;
+            padding: .5em
+        }
     </style>
 </head>
 <body>
@@ -65,11 +69,12 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
+                                    <li><a href="{{ route('admin') }}">Panel de administración</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            Salir
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
