@@ -13,4 +13,8 @@ class Municipio extends Model
     public function getRouteKeyName() {
         return 'nombre';
     }
+
+    public function horarios() {
+    	return $this->hasMany(Horario::class);
+    }
 }
