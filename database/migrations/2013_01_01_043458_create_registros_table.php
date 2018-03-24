@@ -15,12 +15,14 @@ class CreateRegistrosTable extends Migration
     {
         Schema::create('registros', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
-            $table->integer('municipio_id')->unsigned();
+            $table->integer('horario_id')->unsigned();
             $table->string('cedula', 16);
             $table->string('nombre', 64);
             $table->string('hora', 16);
             $table->integer('intentos');
+            $table->timestamps();
+
+            $table->foreign('horario_id')->references('id')->on('horarios');
         });
     }
 

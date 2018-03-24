@@ -15,8 +15,7 @@ class MunicipiosTableSeeder extends Seeder
         $municipios = ['Michelena', 'Cordero'];
         foreach ($municipios as $municipio) {
             DB::table('municipios')->insert([ //,
-                'nombre' => $municipio,
-                'hora' => '07:10 PM'
+                'nombre' => $municipio
             ]);
         }
     }

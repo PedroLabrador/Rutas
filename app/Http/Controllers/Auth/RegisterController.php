@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Municipio;
 use App\Rules\Special;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -51,8 +52,20 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'town' => 'required|string',
             'password' => 'required|string|min:6|confirmed',
             'special' => new Special()
+        ], [
+            'name.required' => 'El nombre es requerido.',
+            'name.max' => 'El nombre no debe exceder los 255 caracteres.',
+            'email.required' => 'El correo es requerido.',
+            'email.email' => 'El correo tiene un tipo incorrecto.',
+            'email.max' => 'El correo no debe exceder los 255 caracteres.',
+            'email.unique' => 'El correo ya está registrado.',
+            'town.required' => 'El municipio es requerido.',
+            'password.required' => 'La contraseña es requerida.',
+            'password.min' => 'La contraseña debe contener minimo 6 caracteres.',
+            'password.confirmed' => 'Las contraseñas no coindicen.'
         ]);
     }
 
@@ -64,7 +77,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $town = $data['town'];
+        $municipio = Municipio::where('nombre', 'LIKE', "%$town%")->first();
+        if (!$municipio) {
+            Municipio::create([
+                'nombre' => $town
+            ]);
+            $municipio = Municipio::where('nombre', 'LIKE', "%$town%")->first();
+        }
         return User::create([
+            'municipio_id' => $municipio->id,
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
