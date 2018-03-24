@@ -24,6 +24,9 @@
         .m-t-2 {
             margin-top: 5%
         }
+        .p-t {
+            padding-top: 1em
+        }
         .float-right {
             float: right;
             padding: .5em
