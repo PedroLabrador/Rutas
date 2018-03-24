@@ -1,0 +1,27 @@
+warning: LF will be replaced by CRLF in app/Http/Controllers/AdminController.php.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in app/Http/Controllers/HomeController.php.
+The file will have its original line endings in your working directory.
+[1mdiff --git a/app/Http/Controllers/AdminController.php b/app/Http/Controllers/AdminController.php[m
+[1mindex f00c36a..7070746 100644[m
+[1m--- a/app/Http/Controllers/AdminController.php[m
+[1m+++ b/app/Http/Controllers/AdminController.php[m
+[36m@@ -2,11 +2,17 @@[m
+ [m
+ namespace App\Http\Controllers;[m
+ [m
+[32m+[m[32muse App\Horario;[m
+ use Illuminate\Http\Request;[m
+ [m
+ class AdminController extends Controller[m
+ {[m
+[31m-    public function index() {[m
+[32m+[m
+[32m+[m[32m    public function index(Request $request) {[m
+     	return view('admin.index');[m
+     }[m
+[32m+[m
+[32m+[m[32m    public function mostrar() {[m
+[32m+[m[32m        return view('admin.show');[m
+[32m+[m[32m    }[m
+ }[m
