@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Horario extends Model
 {
+	protected $fillable = ['municipio_id', 'hora'];
+
+	public $timestamps = false;
+
     public function municipio() {
     	return $this->belongsTo(Municipio::class);
     }
