@@ -13,9 +13,12 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@home');
-Route::get('/lista/{municipio}/{hora}', 'HomeController@listar');
+Route::get ('/', 'HomeController@home');
 Route::post('/registrar', 'HomeController@registrar');
-Route::get('/home', 'HomeController@home');
+Route::get ('/lista/{municipio}/{hora}', 'HomeController@listar');
 
-Route::get('/admin', 'AdminController@index')->middleware('auth');
+Route::group(['middleware' => ['auth']], function() {
+	Route::get ('/admin', 'AdminController@index')->name('admin');
+	Route::get ('/crear', 'AdminController@show');
+	Route::post('/crear', 'AdminController@crear');
+});
