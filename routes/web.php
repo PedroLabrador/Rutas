@@ -18,7 +18,10 @@ Route::post('/registrar', 'HomeController@registrar');
 Route::get ('/lista/{municipio}/{hora}', 'HomeController@listar');
 
 Route::group(['middleware' => ['auth']], function() {
-	Route::get ('/admin', 'AdminController@index')->name('admin');
-	Route::get ('/crear', 'AdminController@show');
-	Route::post('/crear', 'AdminController@crear');
+	Route::get ('/admin',  'AdminController@index' )->name('admin');
+	Route::get ('/crear',  'AdminController@show'  );
+	Route::post('/crear',  'AdminController@crear' );
+	Route::get ('/editar/{id}', 'AdminController@editar');
+	Route::post('/editar/{id}', 'AdminController@edit'  );
+	Route::get ('/borrar/{id}', 'AdminController@borrar');
 });

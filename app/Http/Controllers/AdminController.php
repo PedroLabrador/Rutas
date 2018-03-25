@@ -23,8 +23,20 @@ class AdminController extends Controller
         ]);	
 
     	$data['municipio_id'] = \Auth::user()->municipio->id;
-    	$data['hora'] = $request->input('hour');
+    	$data['hora'] =  date('h:i A', strtotime($request->input('hour')));
     	Horario::create($data);
         return redirect('/crear')->with('flash_message', 'Hora creada!');
+    }
+
+    public function editar($id) {
+        $horario = Horario::where('id', $id)->first();
+        $hora = date('H:i', strtotime($horario->hora));
+        return view('admin.edit', ['hora' => $hora]);
+    }
+
+    public function borrar($id) {
+        $horario = Horario::where('id', $id)->first();
+        Horario::destroy($id);
+        return redirect('/admin')->with('delete', 'Horario '. $horario->hora .' borrado!');
     }
 }

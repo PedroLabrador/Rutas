@@ -8,6 +8,13 @@
                 <div class="panel-heading">Panel de Administración</div>
 
                 <div class="panel-body">
+                    @if (session()->has('delete'))
+                        <div class="m-t-2">
+                            <div class="alert alert-success">
+                                {{ session()->get('delete') }}
+                            </div>
+                        </div>
+                    @endif
                     <span class='float-right'><strong>{{ Auth::user()->municipio->nombre }}</strong></span>
                     <h5>Bienvenido/a {{ Auth::user()->name }}</h5>
                     <hr>
@@ -25,8 +32,8 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $actual->hora }}</td>
                                 <td><a class='btn btn-warning' href="/lista/{{Auth::user()->municipio->nombre}}/{{$actual->hora}}">Lista</a></td>
-                                <td><a class='btn btn-primary' href="/crear">Editar</a></td>
-                                <td><a class='btn btn-danger'  href="">Borrar</a></td>
+                                <td><a class='btn btn-primary' href="/editar/{{$actual->id}}">Editar</a></td>
+                                <td><a class='btn btn-danger'  href="/borrar/{{$actual->id}}">Borrar</a></td>
                             </tr>        
                             @empty
                                 No hay rutas agregadas.
