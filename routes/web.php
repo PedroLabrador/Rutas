@@ -13,7 +13,7 @@
 
 Auth::routes();
 
-Route::get ('/', 'HomeController@home');
+Route::get ('/', 'HomeController@home')->name('home');
 Route::post('/registrar', 'HomeController@registrar');
 Route::get ('/lista/{municipio}/{hora}', 'HomeController@listar');
 
