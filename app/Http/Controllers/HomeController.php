@@ -21,8 +21,19 @@ class HomeController extends Controller
 
     public function home() {
         $horarios = Horario::all();
+        $disponible = array();
+        $it = 0;
+        foreach ($horarios as $salida) {
+            $h = (intval(date('H', strtotime($salida->hora)))-2);
+            $m = (intval(date('i', strtotime($salida->hora)))); 
+            $hora = date('h:i A', strtotime($h.':'.$m));
+            $date = new \DateTime($hora);
+            $difference = $date->getTimestamp() - time();
+            $disponible[$it++] = ($difference < 0) ? true : false;
+        }
         return view('home', [
-            'horarios' => $horarios
+            'horarios' => $horarios,
+            'disponible' => $disponible
         ]);
     }
 

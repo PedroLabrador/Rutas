@@ -34,7 +34,9 @@
 								{{ csrf_field() }}
 								<select name="horario_id" id="" class='form-control space'>
 									@forelse ($horarios as $horario)
-										<option value="{{ $horario->id }} {{ $horario->hora }}">{{ $horario->municipio->nombre }} Hora: {{ $horario->hora }}</option>
+										@if ($disponible[$loop->iteration - 1])
+											<option value="{{ $horario->id }} {{ $horario->hora }}">{{ $horario->municipio->nombre }} Hora: {{ $horario->hora }}</option>
+										@endif
 									@empty
 										<option value="0" selected disabled>No hay rutas</option>                       
 									@endforelse
