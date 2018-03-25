@@ -10,8 +10,15 @@
                 <div class="panel-body">
                     @if (session()->has('delete'))
                         <div class="m-t-2">
-                            <div class="alert alert-success">
+                            <div class="alert alert-warning">
                                 {{ session()->get('delete') }}
+                            </div>
+                        </div>
+                    @endif
+                    @if (session()->has('flash_message'))
+                        <div class="m-t-2">
+                            <div class="alert alert-success">
+                                {{ session()->get('flash_message') }}
                             </div>
                         </div>
                     @endif

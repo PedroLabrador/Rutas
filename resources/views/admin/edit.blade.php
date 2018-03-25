@@ -37,6 +37,7 @@
                 		<div class="col-md-4 col-md-offset-4 p-t text-center">
                 			<button class='btn btn-default'>Modificar</button>
                 		</div>
+                		<input type='hidden' value='{{$id}}' name='id'>
                     </form>
 			    </div>
             </div>

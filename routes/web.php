@@ -21,7 +21,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get ('/admin',  'AdminController@index' )->name('admin');
 	Route::get ('/crear',  'AdminController@show'  );
 	Route::post('/crear',  'AdminController@crear' );
-	Route::get ('/editar/{id}', 'AdminController@editar');
-	Route::post('/editar/{id}', 'AdminController@edit'  );
+	Route::get ('/editar/{id}', 'AdminController@mostrar');
+	Route::post('/editar/{id}', 'AdminController@editar'  );
 	Route::get ('/borrar/{id}', 'AdminController@borrar');
 });

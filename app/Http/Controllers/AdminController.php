@@ -28,10 +28,18 @@ class AdminController extends Controller
         return redirect('/crear')->with('flash_message', 'Hora creada!');
     }
 
-    public function editar($id) {
+    public function mostrar($id) {
         $horario = Horario::where('id', $id)->first();
         $hora = date('H:i', strtotime($horario->hora));
-        return view('admin.edit', ['hora' => $hora]);
+        return view('admin.edit', ['hora' => $hora, 'id' => $horario->id]);
+    }
+
+    public function editar(Request $request) {
+        $id = $request->input('id');
+        $data['hora'] = date('h:i A', strtotime($request->input('hour')));
+        $horario = Horario::where('id', $id);
+        $horario->update($data);
+        return redirect('/admin')->with('flash_message', 'Hora editada!');
     }
 
     public function borrar($id) {
