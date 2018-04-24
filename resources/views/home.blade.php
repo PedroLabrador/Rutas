@@ -14,6 +14,7 @@
                             <a class="btn btn-default" href="/municipio/{{ $municipio->nombre }}">{{ $municipio->nombre }}</a>
                         </div>
                     @empty
+                        No hay municipios registrados
                     @endforelse
 
 			    </div>

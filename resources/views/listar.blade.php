@@ -21,7 +21,7 @@
         </div>
     @endif
     <h2>Lista {{ Request::route()->municipio->nombre . " " . $ruta->hora }}</h2>
-    
+
     <div class="m-t-2">
         <div class="container">
             <table class="table">
@@ -31,7 +31,7 @@
                     <th>Nombre</th>
                     <th></th>
                 </tr>
-                
+
                 @forelse ($lista as $usuario)
                 <tr>
                     <td>{{ $loop->iteration }}</td>

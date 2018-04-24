@@ -49,6 +49,7 @@
 
 			    </div>
             </div>
+            <a href="{{ route('admin') }}" class='btn btn-default'>Atras</a>
         </div>
     </div>
 </div>
