@@ -84,15 +84,20 @@ class HomeController extends Controller
                     ->whereDate('created_at', '=', date('Y-m-d'))
                     ->where('horario_id', $requestData['horario_id'])
                     ->first();
-        if ($existe) {
-            $existe->intentos++;
-            $existe->save();
-            return redirect('/')->with('flash_message', 'Anotado en la ruta!');
-        }
-        Registro::create($requestData);
 
         $municipio = $horario->municipio->nombre;
         $hora = $requestData['hora'];
+
+        if ($existe) {
+            $existe->intentos++;
+            $existe->save();
+            return redirect("/lista/$municipio/$hora");
+        }
+        Registro::create($requestData);
+
+        if (\Auth::user())
+            return redirect("/anotar/$municipio")->with('flash_message', 'Anotado en la ruta!');
+
         return redirect("/lista/$municipio/$hora");
     }
 }
