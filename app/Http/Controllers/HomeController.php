@@ -32,13 +32,12 @@ class HomeController extends Controller
                              get();
         $disponible = array();
         $it = 0;
+        $cant = 1;
         foreach ($horarios as $salida) {
-            $h = (intval(date('H', strtotime($salida->hora)))-1);
-            $m = (intval(date('i', strtotime($salida->hora))));
-            $hora = date('h:i A', strtotime($h.':'.$m));
-            $date = new \DateTime($hora);
-            $difference = $date->getTimestamp() - time();
-            $disponible[$it++] = ($difference < 0) ? true : false;
+            $timeFirst  = strtotime($salida->hora) - ($cant * 60 * 60);
+            $timeSecond = time();
+            $diff = $timeSecond - $timeFirst;
+            $disponible[$it++] = ($diff > 0 && $diff < 4500 ) ? true : false;
         }
         return view('general', [
             'horarios' => $horarios,
