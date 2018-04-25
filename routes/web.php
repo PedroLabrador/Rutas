@@ -15,6 +15,7 @@ Auth::routes();
 
 Route::get ('/', 'HomeController@home')->name('home');
 Route::post('/registrar', 'HomeController@registrar');
+Route::get ('/municipio/{municipio}', 'HomeController@general');
 Route::get ('/lista/{municipio}/{hora}', 'HomeController@listar');
 
 Route::group(['middleware' => ['auth']], function() {
@@ -23,5 +24,5 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::post('/crear',  'AdminController@crear' );
 	Route::get ('/editar/{id}', 'AdminController@mostrar');
 	Route::post('/editar/{id}', 'AdminController@editar'  );
-	Route::get ('/borrar/{id}', 'AdminController@borrar');
+	Route::get ('/anotar/{municipio}', 'AdminController@anotar');
 });
