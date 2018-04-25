@@ -20,18 +20,27 @@ class HomeController extends Controller
     }
 
     public function home() {
-        $horarios = Horario::all();
+        $municipios = Municipio::all();
+        return view('home', [
+            'municipios' => $municipios
+        ]);
+    }
+
+    public function general(Municipio $municipio) {
+        $horarios = Horario::where('municipio_id', $municipio->id)->
+                             where('check', true)->
+                             get();
         $disponible = array();
         $it = 0;
         foreach ($horarios as $salida) {
-            $h = (intval(date('H', strtotime($salida->hora)))-2);
-            $m = (intval(date('i', strtotime($salida->hora)))); 
+            $h = (intval(date('H', strtotime($salida->hora)))-1);
+            $m = (intval(date('i', strtotime($salida->hora))));
             $hora = date('h:i A', strtotime($h.':'.$m));
             $date = new \DateTime($hora);
             $difference = $date->getTimestamp() - time();
             $disponible[$it++] = ($difference < 0) ? true : false;
         }
-        return view('home', [
+        return view('general', [
             'horarios' => $horarios,
             'disponible' => $disponible
         ]);
@@ -69,6 +78,9 @@ class HomeController extends Controller
         $requestData['horario_id'] = $separar[0];
         $requestData['hora'] = $separar[1];
         $requestData['intentos'] = 1;
+
+        $horario = Horario::where('id', $requestData['horario_id'])->first();
+
         $existe = Registro::where('cedula', $requestData['cedula'])
                     ->whereDate('created_at', '=', date('Y-m-d'))
                     ->where('horario_id', $requestData['horario_id'])
@@ -76,9 +88,12 @@ class HomeController extends Controller
         if ($existe) {
             $existe->intentos++;
             $existe->save();
-            return redirect('/')->with('flash_message', 'Anotado en la ruta!');    
+            return redirect('/')->with('flash_message', 'Anotado en la ruta!');
         }
         Registro::create($requestData);
-        return redirect('/')->with('flash_message', 'Anotado en la ruta!');
+
+        $municipio = $horario->municipio->nombre;
+        $hora = $requestData['hora'];
+        return redirect("/lista/$municipio/$hora");
     }
 }
