@@ -30,9 +30,14 @@
                     <form class='form' method='post'>
                 		{{ csrf_field() }}
                 		<div class='text-center'><label for='hour'>Hora</label></div>
-                		
+
                 		<div class="col-md-4 col-md-offset-4 p-t">
 							<input type='time' class='form-control' name='hour' id='hour' value='{{$hora}}' required>
+                		</div>
+
+                        <div class="col-md-4 col-md-offset-4 p-t">
+                            <div class='text-center'><label for='hour'>Habilitar</label></div>
+							<input class="form-check" type='checkbox' name='check' id='check' {{($check)?"checked":" "}}>
                 		</div>
                 		<div class="col-md-4 col-md-offset-4 p-t text-center">
                 			<button class='btn btn-default'>Modificar</button>
