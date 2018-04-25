@@ -25,7 +25,7 @@
                     <span class='float-right'><strong>{{ Auth::user()->municipio->nombre }}</strong></span>
                     <h5>Bienvenido/a {{ Auth::user()->name }}</h5>
                     <hr>
-                    <div class="table-responsive">          
+                    <div class="table-responsive">
                         <table class="table">
                             <tr>
                                 <th>#</th>
@@ -40,14 +40,14 @@
                                 <td>{{ $actual->hora }}</td>
                                 <td><a class='btn btn-warning' href="/lista/{{Auth::user()->municipio->nombre}}/{{$actual->hora}}">Lista</a></td>
                                 <td><a class='btn btn-primary' href="/editar/{{$actual->id}}">Editar</a></td>
-                                <td><a class='btn btn-danger'  href="/borrar/{{$actual->id}}">Borrar</a></td>
-                            </tr>        
+                                <td><a class='btn btn-primary' href="/anotar/{{Auth::user()->municipio->nombre}}">Anotar</a></td>
+                            </tr>
                             @empty
                                 No hay rutas agregadas.
                             @endforelse
                     </table>
                     </div>
-                    
+
                 	<a class="btn btn-default" href='/crear'>Crear nueva hora de salida</a>
 			    </div>
             </div>
