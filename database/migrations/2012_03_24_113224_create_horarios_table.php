@@ -17,6 +17,7 @@ class CreateHorariosTable extends Migration
             $table->increments('id');
             $table->integer('municipio_id')->unsigned();
             $table->string('hora', 16);
+            $table->boolean('check');
 
             $table->foreign('municipio_id')->references('id')->on('municipios');
         });
